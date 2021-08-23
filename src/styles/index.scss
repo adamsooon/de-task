@@ -1,0 +1,73 @@
+@import "variables";
+
+@mixin breakpointLarge() {
+  @media only screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul,
+figure {
+  margin: 0;
+}
+
+.root {
+  margin-top: 70px;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 10px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $white;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.6);
+}
+
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @include breakpointLarge() {
+    justify-content: flex-start;
+  }
+}
+
+.navbar-logo {
+  flex: 0 0 60px;
+  width: 60px;
+
+  & > img {
+    width: 100%;
+  }
+}
+
+.navbar-dropdown-item {
+  display: block;
+  min-width: 68px;
+}
+
+.profile-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header-main {
+  text-align: center;
+}
+
+.footer {
+  margin-top: 50px;
+  border-top: 1px solid;
+}
