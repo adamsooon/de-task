@@ -33,133 +33,142 @@ function ProfileForm() {
   };
 
   return (
-    <div className="container">
-      <Form onSubmit={(formState) => handleSave(formState)}>
-        {({ formProps }) => (
-          <form {...formProps}>
-            <h1 className="header-main">Profile form</h1>
-            <Field
-              isRequired
-              label="First name"
-              name="firstName"
-              validate={(value) => formValidator("name", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <Textfield
-                    placeholder="Enter your first name"
-                    {...fieldProps}
-                  />
-                  {error && (
-                    <ErrorMessage>
-                      First name must contains only letters from a-z
-                    </ErrorMessage>
-                  )}
-                </>
-              )}
-            </Field>
-            <Field
-              isRequired
-              label="Last name"
-              name="lastName"
-              validate={(value) => formValidator("name", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <Textfield
-                    placeholder="Enter your last name"
-                    {...fieldProps}
-                  />
-                  {error && (
-                    <ErrorMessage>
-                      Last name must contains only letters from a-z
-                    </ErrorMessage>
-                  )}
-                </>
-              )}
-            </Field>
-            <Field
-              isRequired
-              label="Email"
-              name="email"
-              validate={(value) => formValidator("email", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <Textfield placeholder="Enter your e-mail" {...fieldProps} />
-                  {error && <ErrorMessage>Invalid e-mail</ErrorMessage>}
-                </>
-              )}
-            </Field>
-            <Field
-              isRequired
-              label="Phone number"
-              name="phone"
-              validate={(value) => formValidator("phone", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <Textfield
-                    placeholder="Enter your phone number"
-                    {...fieldProps}
-                  />
-                  {error && <ErrorMessage>Invalid phone number </ErrorMessage>}
-                </>
-              )}
-            </Field>
-            <Field
-              isRequired
-              label="About"
-              name="about"
-              validate={(value) => formValidator("about", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <TextArea
-                    placeholder="Type something about you"
-                    minimumRows={3}
-                    {...fieldProps}
-                  />
-                  {error && <ErrorMessage>This field is required</ErrorMessage>}
-                </>
-              )}
-            </Field>
-            <Field
-              name="birthday"
-              label="Birthday"
-              isRequired
-              validate={(value) => formValidator("birthday", value)}
-            >
-              {({ fieldProps, error }) => (
-                <>
-                  <DatePicker
-                    {...fieldProps}
-                    placeholder="Pick your birthday"
-                  />
-                  {error && <ErrorMessage>Pick your birthday</ErrorMessage>}
-                </>
-              )}
-            </Field>
-            <AvatarUploadComponent
-              handleSetImagePreviewSourceViaViaFileAPI={
-                setImagePreviewSourceViaViaFileAPI
-              }
-              imagePreviewSourceViaFileAPI={imagePreviewSourceViaFileAPI}
-            />
-
-            <FormFooter>
-              <LoadingButton
-                type="submit"
-                appearance="primary"
-                isLoading={isFormSending}
+    <section>
+      <div className="container">
+        <h1 className="header-main">Profile form</h1>
+        <Form onSubmit={(formState) => handleSave(formState)}>
+          {({ formProps }) => (
+            <form {...formProps}>
+              <Field
+                isRequired
+                label="First name"
+                name="firstName"
+                validate={(value) => formValidator("name", value)}
               >
-                Submit
-              </LoadingButton>
-            </FormFooter>
-          </form>
-        )}
-      </Form>
-    </div>
+                {({ fieldProps, error }) => (
+                  <>
+                    <Textfield
+                      placeholder="Enter your first name"
+                      {...fieldProps}
+                    />
+                    {error && (
+                      <ErrorMessage>
+                        First name must contains only letters from a-z
+                      </ErrorMessage>
+                    )}
+                  </>
+                )}
+              </Field>
+              <Field
+                isRequired
+                label="Last name"
+                name="lastName"
+                validate={(value) => formValidator("name", value)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <Textfield
+                      placeholder="Enter your last name"
+                      {...fieldProps}
+                    />
+                    {error && (
+                      <ErrorMessage>
+                        Last name must contains only letters from a-z
+                      </ErrorMessage>
+                    )}
+                  </>
+                )}
+              </Field>
+              <Field
+                isRequired
+                label="Email"
+                name="email"
+                validate={(value) => formValidator("email", value)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <Textfield
+                      placeholder="Enter your e-mail"
+                      {...fieldProps}
+                    />
+                    {error && <ErrorMessage>Invalid e-mail</ErrorMessage>}
+                  </>
+                )}
+              </Field>
+              <Field
+                isRequired
+                label="Phone number"
+                name="phone"
+                validate={(value) => formValidator("phone", value)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <Textfield
+                      placeholder="Enter your phone number"
+                      {...fieldProps}
+                    />
+                    {error && (
+                      <ErrorMessage>Invalid phone number </ErrorMessage>
+                    )}
+                  </>
+                )}
+              </Field>
+              <Field
+                isRequired
+                label="About"
+                name="about"
+                validate={(value) => formValidator("about", value)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <TextArea
+                      placeholder="Type something about you"
+                      minimumRows={3}
+                      {...fieldProps}
+                    />
+                    {error && (
+                      <ErrorMessage>This field is required</ErrorMessage>
+                    )}
+                  </>
+                )}
+              </Field>
+              <Field
+                name="birthday"
+                label="Birthday"
+                isRequired
+                validate={(value) => formValidator("birthday", value)}
+              >
+                {({ fieldProps, error }) => (
+                  <>
+                    <DatePicker
+                      {...fieldProps}
+                      placeholder="Pick your birthday"
+                    />
+                    {error && <ErrorMessage>Pick your birthday</ErrorMessage>}
+                  </>
+                )}
+              </Field>
+              <AvatarUploadComponent
+                handleSetImagePreviewSourceViaViaFileAPI={
+                  setImagePreviewSourceViaViaFileAPI
+                }
+                imagePreviewSourceViaFileAPI={imagePreviewSourceViaFileAPI}
+              />
+
+              <FormFooter>
+                <LoadingButton
+                  type="submit"
+                  appearance="primary"
+                  isLoading={isFormSending}
+                >
+                  Submit
+                </LoadingButton>
+              </FormFooter>
+            </form>
+          )}
+        </Form>
+      </div>
+    </section>
   );
 }
 

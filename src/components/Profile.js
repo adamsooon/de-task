@@ -30,45 +30,52 @@ function Profile() {
     );
   }
   return (
-    <div className="profile">
-      <div className="profile-avatar">
-        <AvatarItem
-          avatar={
-            <Avatar
-              presence="online"
-              src={profileData?.avatar}
-              size="xxlarge"
+    <section>
+      <div className="container-narrow">
+        <h1 className="header-main">
+          Profile {profileData?.firstName} {profileData?.lastName}
+        </h1>
+        <div className="profile">
+          <div className="profile-avatar">
+            <AvatarItem
+              avatar={
+                <Avatar
+                  presence="online"
+                  src={profileData?.avatar}
+                  size="xxlarge"
+                />
+              }
             />
-          }
-        />
+          </div>
+          <div className="profile-data">
+            <div className="profile-item">
+              <span className="profile-item-label">First Name:</span>
+              <span>{profileData?.firstName}</span>
+            </div>
+            <div className="profile-item">
+              <span className="profile-item-label">Last Name:</span>
+              <span>{profileData?.lastName}</span>
+            </div>
+            <div className="profile-item">
+              <span className="profile-item-label">Email:</span>
+              <span>{profileData?.email}</span>
+            </div>
+            <div className="profile-item">
+              <span className="profile-item-label">Phone:</span>
+              <span>{profileData?.phone}</span>
+            </div>
+            <div className="profile-item">
+              <span className="profile-item-label">Birthday:</span>
+              <span>{profileData?.birthday}</span>
+            </div>
+            <div className="profile-item">
+              <span className="profile-item-label">About:</span>
+              <span>{profileData?.about}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="profile-data">
-        <div className="profile-item">
-          <span className="profile-item-label">First Name:</span>
-          <span>{profileData?.firstName}</span>
-        </div>
-        <div className="profile-item">
-          <span className="profile-item-label">Last Name:</span>
-          <span>{profileData?.lastName}</span>
-        </div>
-        <div className="profile-item">
-          <span className="profile-item-label">Email:</span>
-          <span>{profileData?.email}</span>
-        </div>
-        <div className="profile-item">
-          <span className="profile-item-label">Phone:</span>
-          <span>{profileData?.phone}</span>
-        </div>
-        <div className="profile-item">
-          <span className="profile-item-label">Birthday:</span>
-          <span>{profileData?.birthday}</span>
-        </div>
-        <div className="profile-item">
-          <span className="profile-item-label">About:</span>
-          <span>{profileData?.about}</span>
-        </div>
-      </div>
-    </div>
+    </section>
   );
 }
 

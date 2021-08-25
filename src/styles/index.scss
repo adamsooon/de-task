@@ -30,6 +30,19 @@ figure {
   }
 }
 
+.container-narrow {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 10px;
+}
+
+.header-main {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+//navbar styles
 .navbar {
   position: fixed;
   z-index: 999;
@@ -68,10 +81,8 @@ figure {
   margin-top: 15px;
 }
 
+//profile page styles
 .profile {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 40px 10px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -99,25 +110,23 @@ figure {
   }
 }
 
-.header-main {
-  text-align: center;
-}
-
 .profile-item-label {
   display: inline-block;
   margin-right: 10px;
   font-weight: bold;
 }
 
+//Footer styles
+.footer {
+  margin-top: 50px;
+  border-top: 1px solid;
+}
+
+//Spinner styles
 .spinner-box {
   width: 100vw;
   height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.footer {
-  margin-top: 50px;
-  border-top: 1px solid;
 }
