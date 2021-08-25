@@ -12,13 +12,10 @@ export default function App() {
         <NavBar />
 
         <Switch>
-          <Route exact path="/">
-            <ProfileForm />
-          </Route>
           <Route exact path="/ds-task">
             <ProfileForm />
           </Route>
-          <Route path="/ds-task/profile/:profileId">
+          <Route path="/ds-task/profiles/:profileId">
             <Profile />
           </Route>
         </Switch>

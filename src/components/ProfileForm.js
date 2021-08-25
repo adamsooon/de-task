@@ -24,7 +24,7 @@ function ProfileForm() {
       }),
     })
       .then((response) => response.json())
-      .then((data) => history.push(`/ds-task/profile/${data}`))
+      .then((data) => history.push(`/ds-task/profiles/${data}`))
       .catch((e) => {
         // invoke some snackbar with error message here;
         console.log(e);

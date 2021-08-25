@@ -1,3 +1,3 @@
-const menuList = [{ name: "Home", path: "" }];
+const menuList = [{ name: "Home", path: "/ds-task" }];
 
 export default menuList;
