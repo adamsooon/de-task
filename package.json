@@ -1,8 +1,10 @@
 {
   "name": "ds-task",
+  "homepage": "https://adamsooon.github.io/ds-task",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@atlaskit/avatar": "^20.4.0",
     "@atlaskit/button": "^16.1.0",
     "@atlaskit/css-reset": "^6.1.2",
     "@atlaskit/datetime-picker": "^11.0.0",
@@ -16,6 +18,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "classnames": "^2.3.1",
+    "gh-pages": "^3.2.3",
     "node-sass": "4.14.1",
     "prettier": "^2.3.2",
     "prop-types": "^15.7.2",
@@ -32,7 +35,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -58,13 +58,20 @@ figure {
   min-width: 68px;
 }
 
-.profile-form {
+.container-small {
   max-width: 600px;
   margin: 0 auto;
+  padding: 40px 0;
 }
 
 .header-main {
   text-align: center;
+}
+
+.profile-item-label {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
 }
 
 .footer {

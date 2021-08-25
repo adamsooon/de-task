@@ -4,22 +4,31 @@ import Form, { Field, FormFooter, HelperMessage } from "@atlaskit/form";
 import { DatePicker } from "@atlaskit/datetime-picker";
 import Textfield from "@atlaskit/textfield";
 import TextArea from "@atlaskit/textarea";
-import { AvatarPickerDialog, Avatar } from "@atlaskit/media-avatar-picker";
+import Avatar, { AvatarItem } from "@atlaskit/avatar";
+import { AvatarPickerDialog } from "@atlaskit/media-avatar-picker";
 import { ModalTransition } from "@atlaskit/modal-dialog";
 
-const avatars = [{ dataURI: "some-data-uri" }];
-function TableComponent() {
+function ProfileForm() {
   const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
   const [isAvatarLoading, setIsAvatarLoading] = useState(false);
+  const [imagePreviewSourceViaFileAPI, setImagePreviewSourceViaViaFileAPI] =
+    useState("");
   const toggleIsAvatarOpen = () => {
     setIsAvatarModalOpen((isOpen) => !isOpen);
+  };
+
+  const handleImagePicked = (file) => {
+    setIsAvatarLoading(true);
+    setImagePreviewSourceViaViaFileAPI(URL.createObjectURL(file));
+    toggleIsAvatarOpen();
+    setIsAvatarLoading(false);
   };
 
   return (
     <div className="container">
       <Form onSubmit={(formState) => console.log("form submitted", formState)}>
         {({ formProps }) => (
-          <form className="profile-form" {...formProps}>
+          <form {...formProps}>
             <h1 className="header-main">Profile form</h1>
             <Field isRequired label="First name" name="firstName">
               {({ fieldProps }) => (
@@ -94,26 +103,33 @@ function TableComponent() {
                 </>
               )}
             </Field>
+            {imagePreviewSourceViaFileAPI && (
+              <AvatarItem
+                avatar={
+                  <Avatar
+                    presence="online"
+                    src={imagePreviewSourceViaFileAPI}
+                  />
+                }
+              />
+            )}
             <Button appearance="primary" onClick={toggleIsAvatarOpen}>
-              Upload Avatar
+              {!!imagePreviewSourceViaFileAPI
+                ? "Change Avatar"
+                : "Upload Avatar"}
             </Button>
             <ModalTransition>
-              {isAvatarModalOpen && (
+              {!!isAvatarModalOpen && (
                 <AvatarPickerDialog
-                  avatars={avatars}
-                  onImagePicked={(selectedImage, crop) => {
-                    setIsAvatarLoading(true);
-                    console.log(selectedImage.size, crop.x, crop.y, crop.size);
-                  }}
-                  onAvatarPicked={(selectedAvatar) => {
-                    console.log(selectedAvatar.dataURI);
-                    setIsAvatarLoading(true);
+                  onImagePicked={(selectedImage) => {
+                    handleImagePicked(selectedImage);
                   }}
                   onCancel={toggleIsAvatarOpen}
                   isLoading={isAvatarLoading}
                 />
               )}
             </ModalTransition>
+
             <FormFooter>
               <Button type="submit" appearance="primary">
                 Submit
@@ -126,4 +142,4 @@ function TableComponent() {
   );
 }
 
-export default TableComponent;
+export default ProfileForm;

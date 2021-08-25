@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import TableComponent from "./components/TableComponent";
+import ProfileForm from "./components/ProfileForm";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import Profile from "./components/Profile";
 
 export default function App() {
   return (
@@ -11,8 +12,11 @@ export default function App() {
         <NavBar />
 
         <Switch>
-          <Route path="/">
-            <TableComponent />
+          <Route exact path="/ds-task">
+            <ProfileForm />
+          </Route>
+          <Route path="/ds-task/profile/:profileId">
+            <Profile />
           </Route>
         </Switch>
         <Footer />
