@@ -27,12 +27,19 @@ function AvatarUploadComponent({
       {imagePreviewSourceViaFileAPI && (
         <AvatarItem
           avatar={
-            <Avatar presence="online" src={imagePreviewSourceViaFileAPI} />
+            <Avatar
+              presence="online"
+              src={imagePreviewSourceViaFileAPI}
+              size="xxlarge"
+            />
           }
-          primaryText="Mike Cannon-Brookes"
         />
       )}
-      <Button appearance="primary" onClick={toggleIsAvatarOpen}>
+      <Button
+        appearance="primary"
+        className="upload-button"
+        onClick={toggleIsAvatarOpen}
+      >
         {!!imagePreviewSourceViaFileAPI ? "Change Avatar" : "Upload Avatar"}
       </Button>
       <ModalTransition>

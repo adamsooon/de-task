@@ -12,6 +12,9 @@ export default function App() {
         <NavBar />
 
         <Switch>
+          <Route exact path="/">
+            <ProfileForm />
+          </Route>
           <Route exact path="/ds-task">
             <ProfileForm />
           </Route>

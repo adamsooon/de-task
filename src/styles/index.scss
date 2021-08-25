@@ -24,10 +24,15 @@ figure {
   padding: 10px;
   max-width: 1200px;
   width: 100%;
+
+  @include breakpointLarge() {
+    padding: 40px;
+  }
 }
 
 .navbar {
   position: fixed;
+  z-index: 999;
   top: 0;
   width: 100%;
   background: $white;
@@ -40,6 +45,7 @@ figure {
   justify-content: space-between;
 
   @include breakpointLarge() {
+    padding: 10px;
     justify-content: flex-start;
   }
 }
@@ -58,10 +64,39 @@ figure {
   min-width: 68px;
 }
 
-.container-small {
+.upload-button {
+  margin-top: 15px;
+}
+
+.profile {
   max-width: 600px;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 40px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  @include breakpointLarge() {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+  }
+}
+
+.profile-data {
+  @include breakpointLarge() {
+    flex: 0 0 365px;
+  }
+}
+
+.profile-avatar {
+  margin-bottom: 15px;
+
+  @include breakpointLarge() {
+    margin: 0;
+    flex: 0 0 152px;
+  }
 }
 
 .header-main {
@@ -72,6 +107,14 @@ figure {
   display: inline-block;
   margin-right: 10px;
   font-weight: bold;
+}
+
+.spinner-box {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {

@@ -1,139 +1,160 @@
 import React, { useState } from "react";
-import Button from "@atlaskit/button";
-import Form, { Field, FormFooter, HelperMessage } from "@atlaskit/form";
+import { useHistory } from "react-router-dom";
+import Form, { Field, FormFooter, ErrorMessage } from "@atlaskit/form";
 import { DatePicker } from "@atlaskit/datetime-picker";
+import { LoadingButton } from "@atlaskit/button";
 import Textfield from "@atlaskit/textfield";
 import TextArea from "@atlaskit/textarea";
-import Avatar, { AvatarItem } from "@atlaskit/avatar";
-import { AvatarPickerDialog } from "@atlaskit/media-avatar-picker";
-import { ModalTransition } from "@atlaskit/modal-dialog";
+import AvatarUploadComponent from "./AvatarUploadComponent";
+import formValidator from "../utils/formValidator";
 
 function ProfileForm() {
-  const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-  const [isAvatarLoading, setIsAvatarLoading] = useState(false);
+  const [isFormSending, setIsFormSending] = useState(false);
   const [imagePreviewSourceViaFileAPI, setImagePreviewSourceViaViaFileAPI] =
     useState("");
-  const toggleIsAvatarOpen = () => {
-    setIsAvatarModalOpen((isOpen) => !isOpen);
-  };
+  const history = useHistory();
 
-  const handleImagePicked = (file) => {
-    setIsAvatarLoading(true);
-    setImagePreviewSourceViaViaFileAPI(URL.createObjectURL(file));
-    toggleIsAvatarOpen();
-    setIsAvatarLoading(false);
+  const handleSave = (formData) => {
+    setIsFormSending(true);
+    fetch("apis/add", {
+      method: "POST",
+      body: JSON.stringify({
+        ...formData,
+        avatar: imagePreviewSourceViaFileAPI,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => history.push(`/ds-task/profile/${data}`))
+      .catch((e) => {
+        // invoke some snackbar with error message here;
+        console.log(e);
+      })
+      .finally(() => setIsFormSending(false));
   };
 
   return (
     <div className="container">
-      <Form onSubmit={(formState) => console.log("form submitted", formState)}>
+      <Form onSubmit={(formState) => handleSave(formState)}>
         {({ formProps }) => (
           <form {...formProps}>
             <h1 className="header-main">Profile form</h1>
-            <Field isRequired label="First name" name="firstName">
-              {({ fieldProps }) => (
+            <Field
+              isRequired
+              label="First name"
+              name="firstName"
+              validate={(value) => formValidator("name", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
                   <Textfield
                     placeholder="Enter your first name"
                     {...fieldProps}
                   />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  {error && (
+                    <ErrorMessage>
+                      First name must contains only letters from a-z
+                    </ErrorMessage>
+                  )}
                 </>
               )}
             </Field>
-            <Field isRequired label="Last name" name="lastName">
-              {({ fieldProps }) => (
+            <Field
+              isRequired
+              label="Last name"
+              name="lastName"
+              validate={(value) => formValidator("name", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
                   <Textfield
                     placeholder="Enter your last name"
                     {...fieldProps}
                   />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  {error && (
+                    <ErrorMessage>
+                      Last name must contains only letters from a-z
+                    </ErrorMessage>
+                  )}
                 </>
               )}
             </Field>
-            <Field isRequired label="Email" name="email">
-              {({ fieldProps }) => (
+            <Field
+              isRequired
+              label="Email"
+              name="email"
+              validate={(value) => formValidator("email", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
                   <Textfield placeholder="Enter your e-mail" {...fieldProps} />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  {error && <ErrorMessage>Invalid e-mail</ErrorMessage>}
                 </>
               )}
             </Field>
-            <Field isRequired label="Phone number" name="phone">
-              {({ fieldProps }) => (
+            <Field
+              isRequired
+              label="Phone number"
+              name="phone"
+              validate={(value) => formValidator("phone", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
                   <Textfield
                     placeholder="Enter your phone number"
                     {...fieldProps}
                   />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  {error && <ErrorMessage>Invalid phone number </ErrorMessage>}
                 </>
               )}
             </Field>
-            <Field isRequired label="About" name="about">
-              {({ fieldProps }) => (
+            <Field
+              isRequired
+              label="About"
+              name="about"
+              validate={(value) => formValidator("about", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
                   <TextArea
                     placeholder="Type something about you"
                     minimumRows={3}
                     {...fieldProps}
                   />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  {error && <ErrorMessage>This field is required</ErrorMessage>}
                 </>
               )}
             </Field>
-            <Field name="birthday" label="Birthday" isRequired defaultValue="">
-              {({ fieldProps }) => (
+            <Field
+              name="birthday"
+              label="Birthday"
+              isRequired
+              validate={(value) => formValidator("birthday", value)}
+            >
+              {({ fieldProps, error }) => (
                 <>
-                  <DatePicker {...fieldProps} />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
+                  <DatePicker
+                    {...fieldProps}
+                    placeholder="Pick your birthday"
+                  />
+                  {error && <ErrorMessage>Pick your birthday</ErrorMessage>}
                 </>
               )}
             </Field>
-            {imagePreviewSourceViaFileAPI && (
-              <AvatarItem
-                avatar={
-                  <Avatar
-                    presence="online"
-                    src={imagePreviewSourceViaFileAPI}
-                  />
-                }
-              />
-            )}
-            <Button appearance="primary" onClick={toggleIsAvatarOpen}>
-              {!!imagePreviewSourceViaFileAPI
-                ? "Change Avatar"
-                : "Upload Avatar"}
-            </Button>
-            <ModalTransition>
-              {!!isAvatarModalOpen && (
-                <AvatarPickerDialog
-                  onImagePicked={(selectedImage) => {
-                    handleImagePicked(selectedImage);
-                  }}
-                  onCancel={toggleIsAvatarOpen}
-                  isLoading={isAvatarLoading}
-                />
-              )}
-            </ModalTransition>
+            <AvatarUploadComponent
+              handleSetImagePreviewSourceViaViaFileAPI={
+                setImagePreviewSourceViaViaFileAPI
+              }
+              imagePreviewSourceViaFileAPI={imagePreviewSourceViaFileAPI}
+            />
 
             <FormFooter>
-              <Button type="submit" appearance="primary">
+              <LoadingButton
+                type="submit"
+                appearance="primary"
+                isLoading={isFormSending}
+              >
                 Submit
-              </Button>
+              </LoadingButton>
             </FormFooter>
           </form>
         )}
